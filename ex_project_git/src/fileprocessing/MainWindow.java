@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
 	DefaultTableModel model;															// table 값 디폴트 값으로 선언
 	JScrollPane scrollPane;
 
-	NewWIndow gNew;
+	NewWindow gNew;
     InputWindow input;
 	//생성자 초기화
 	MainWindow(){
@@ -112,10 +112,9 @@ public class MainWindow extends JFrame {
 		 jbNew.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
 	                if (gNew == null) {
-	                    gNew = new NewWIndow();
-	                    gNew.NewWIndow();
+	                    gNew = new NewWindow();
+	                    gNew.newwindow();
 	                }
-	                gNew.restField();
 	                gNew.setVisible(true);
 	            }
 	        });

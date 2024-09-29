@@ -87,23 +87,23 @@ public class InputWindow extends JFrame {
 	    gbc.gridy = 1;  																// 두 번째 행
 	    gbc.gridwidth = 1; 	
 	    gbc.fill = GridBagConstraints.HORIZONTAL; 										// 가로 방향으로 공간을 차지하도록 설정
-        gbc.weightx = 0.92; 		 														// x 방향으로 추가 공간을 차지하도록 설정
+        gbc.weightx = 0.94; 		 														// x 방향으로 추가 공간을 차지하도록 설정
         gbc.weighty = 0.1; 										 						// y 방향으로 추가 공간을 차지하도록 설정// 하나의 열을 차지
         gbc.insets = new Insets(5, -1, 5, 2);  // 여백 설정 (위, 왼쪽, 아래, 오른쪽)
         c_Panel.add(jtf,gbc);
-		jtf.setPreferredSize(new Dimension(100, 25));  // 텍스트 필드 크기 설정
+		jtf.setPreferredSize(new Dimension(100, 19));  // 텍스트 필드 크기 설정
 	    jtf.setFont(new Font("고딕", Font.PLAIN, 14));  // 폰트 크기 설정
 	    
 		gbc.gridx = 1; 																	// 두 번째 열
-		gbc.weightx = 0.08; // x 방향으로 추가 공간을 차지하도록 설정
+		gbc.weightx = 0.06; // x 방향으로 추가 공간을 차지하도록 설정
 		c_Panel.add(jbSearch,gbc);
-		jbSearch.setFont(new Font("고딕",Font.ITALIC,12));
-		jbSearch.setPreferredSize(new Dimension(80, 16));  // 검색 버튼 크기 설정
+		jbSearch.setFont(new Font("고딕",Font.ITALIC,13));
+		jbSearch.setPreferredSize(new Dimension(80, 19));  // 검색 버튼 크기 설정
 	    jbSearch.setMargin(new Insets(0, 0, 0, 0));
 	    
 		scrollPane.setPreferredSize(new Dimension(450,200));							// 스크롤페인 크기지정
 		table.getColumn("상품명").setPreferredWidth(230);
-		table.getColumn("가격").setPreferredWidth(180);
+		table.getColumn("가격").setPreferredWidth(180); 
 		
 		
 		JPanel s_Panel = new JPanel();
