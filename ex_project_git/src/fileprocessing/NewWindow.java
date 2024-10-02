@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,13 +26,15 @@ import javax.swing.SwingUtilities;
 public class NewWindow extends JDialog{
 
 	//매개변수
-	JButton jbYes,jbNo;																	// 등록,취소 버튼
+	JButton jbYes,jbNo;																		// 등록,취소 버튼
 	JLabel 	jlCate,jlProduct,jlPrice,jlUnit;												// 상품등록창 라벨
-	JTextField jtf1,jtf2,jtf3,jtf4;														// 상품등록 입력창
+	JTextField jtf1,jtf2,jtf3,jtf4;															// 상품등록 입력창
 
 	HashMap<String, Integer> categoryMap ;
 	int nextCategoryId = 1; 
 	private NewWindowListener listener;
+	DecimalFormat formatter;
+	
 	//상품등록창 생성자
 	public NewWindow(JFrame owner) {
 		super(owner,"상품 등록창", true);	// 제목
@@ -42,13 +45,16 @@ public class NewWindow extends JDialog{
 		jbNo		= new JButton("취소");
 
 		jlCate		= new JLabel("카테고리명");
-		jlProduct		= new JLabel("      상품명");
+		jlProduct		= new JLabel("       상품명");
 		jlPrice		= new JLabel("          가격");
 		jlUnit		= new JLabel("  단위/규격");
 		jtf1		= new JTextField(16);
 		jtf2		= new JTextField(16);
 		jtf3		= new JTextField(16);
 		jtf4		= new JTextField(16);
+		
+		formatter = new DecimalFormat("###,###");
+		
 		loadCategories();
 		eventProc();
 		newWindow();
@@ -62,7 +68,6 @@ public class NewWindow extends JDialog{
 	//	상품등록창 메서드
 	void newWindow() {
 		// 레이아웃 설정
-		System.out.println("NewWindow 생성자 호출됨.");
 		// 화면 구성	
 		setLayout(new BorderLayout());													// 메인 화면구성은 보더 레이아웃
 
@@ -108,11 +113,9 @@ public class NewWindow extends JDialog{
 	
 	
 	void eventProc() {	
-		System.out.println("이벤트 메서드 호출됨.");
 		jbNo.addActionListener(new ActionListener() {									// 취소버튼 누를시 닫침
 
 			public void actionPerformed(ActionEvent e) {	
-				System.out.println("취소 버튼 클릭됨.");
 				dispose();
 
 			}
@@ -121,10 +124,9 @@ public class NewWindow extends JDialog{
 
 
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("등록 버튼 클릭됨.");
 				String category = jtf1.getText();
 				String product	= jtf2.getText();
-				String price	= jtf3.getText();
+				String price	= formatter.format(Integer.parseInt(jtf3.getText()));
 				String unit		= jtf4.getText();
 
 
@@ -136,6 +138,7 @@ public class NewWindow extends JDialog{
 					categoryId = categoryMap.get(category);
 				}
 				saveToFile(categoryId,category, product,price,unit);
+				MainWindow win = new MainWindow();
 				restField();
 				
 				if (listener != null) {
@@ -157,7 +160,7 @@ public class NewWindow extends JDialog{
 	void saveToFile(int count,String category,String product,String price,String unit) {
 
 		try(BufferedWriter writer = new BufferedWriter(new FileWriter("products.txt", true))){
-			writer.write(String.format("%d,%s,%s,%s,%s\n",count,category,product,price,unit));
+			writer.write(String.format("%d/%s/%s/%s/%s\n",count,category,product,price,unit));
 			writer.flush();
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -169,7 +172,7 @@ public class NewWindow extends JDialog{
 			if(Files.exists(Paths.get("products.txt")) && Files.size(Paths.get("products.txt")) > 0) {
 				List<String> lines = Files.readAllLines(Paths.get("products.txt"));
 				for(String line: lines) {
-					String[] parts = line.split(",");
+					String[] parts = line.split("/");
 					if(parts.length >= 2) {
 						try {
 							int categoryId = Integer.parseInt(parts[0]);

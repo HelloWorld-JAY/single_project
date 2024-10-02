@@ -32,7 +32,7 @@ public class InputWindow extends JFrame {
 	JTextField jtf;
 	JButton jbSearch,jbYes,jbNo;
 	
-	String [] header = {"상품 No.","상품명","가격","수량","단위"};							// table 분류바 선언
+	String [] header = {"상품 No.","상품명","가격","수량","단위"};								// table 분류바 선언
 
 	JTable table;									 									// table 선언
 	DefaultTableModel model;															// table 값 디폴트 값으로 선언
