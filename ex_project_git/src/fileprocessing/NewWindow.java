@@ -41,7 +41,7 @@ public class NewWindow extends JDialog{
 
 
 		categoryMap = new HashMap<>();
-		jbYes		= new JButton("등록");												// 각 변수 초기화 입력
+		jbYes		= new JButton("등록");													// 각 변수 초기화 입력
 		jbNo		= new JButton("취소");
 
 		jlCate		= new JLabel("카테고리명");
@@ -59,7 +59,7 @@ public class NewWindow extends JDialog{
 		eventProc();
 		newWindow();
 
-																		// 버튼클릭시 이벤트 불러오기
+																						// 버튼클릭시 이벤트 불러오기
 		 
 	}
 	public interface NewWindowListener {
@@ -150,6 +150,8 @@ public class NewWindow extends JDialog{
 
 			}
 		});
+		
+		
 	}
 	void restField() {
 		jtf1.setText("");

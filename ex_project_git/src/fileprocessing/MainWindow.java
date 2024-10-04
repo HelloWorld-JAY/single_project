@@ -15,6 +15,7 @@ import java.util.regex.PatternSyntaxException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -197,6 +198,17 @@ public class MainWindow extends JFrame {
 			}
 		});
 
+		jbDel.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				int selectIndex = table.getSelectedRow();
+				if(selectIndex != -1) {
+					model.removeRow(selectIndex);
+					
+				}else JOptionPane.showMessageDialog(null, "삭제할 행을 선택해 주세요.");
+			}
+		});
 	}
 	void search() {
 		String searchText = jtf.getText().trim();
